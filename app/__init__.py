@@ -1,4 +1,3 @@
-#coding:utf8
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 import os
@@ -11,6 +10,8 @@ app.config["UP_DIR"] = os.path.join(os.path.abspath(os.path.dirname(__file__)), 
 
 db = SQLAlchemy(app)
 app.debug = True
+app.template_folder = '../templates'
+app.template_folder = '../static'
 
 app.config['SECRET_KEY'] = '454'
 
@@ -26,4 +27,9 @@ app.register_blueprint(user_blueprint)
 
 @app.errorhandler(404)
 def page_not_found(error):
-    return render_template("home/404.html"), 404
+    return render_template("404.html"), 404
+
+
+@app.route('/')
+def index():
+    return render_template("index.html")
