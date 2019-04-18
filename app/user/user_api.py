@@ -42,7 +42,7 @@ app.add_url_rule('/users/', defaults={'user_id': None},
 app.add_url_rule('/users/', view_func=user_view, methods=['POST',])
 app.add_url_rule('/users/<int:user_id>', view_func=user_view,
                  methods=['GET', 'PUT', 'DELETE'])
-
+111
 
 
 # def register_api(view, endpoint, url, pk='id', pk_type='int'):
