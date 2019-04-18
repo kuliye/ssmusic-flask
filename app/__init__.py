@@ -14,11 +14,11 @@ app.static_folder = '../static'
 
 app.config['SECRET_KEY'] = '454'
 
-from app.index import index as index_blueprint
-from app.user import user as user_blueprint
+from .index import index
+from .user import user
 
-app.register_blueprint(index_blueprint)
-app.register_blueprint(user_blueprint)
+app.register_blueprint(index, url_prefix='/')
+app.register_blueprint(user, url_prefix='/user')
 
 
 @app.errorhandler(404)
@@ -26,6 +26,3 @@ def page_not_found(error):
     return render_template("404.html"), 404
 
 
-@app.route('/')
-def index():
-    return render_template("index.html")

@@ -1,9 +1,10 @@
 from app import app
-from flask import render_template
+from flask import render_template, Blueprint
 from flask.views import View, MethodView
 
+from . import user
 
-@app.route('/login')
+@user.route("/")
 def user_login():
     return render_template("index.html")
 
@@ -18,7 +19,7 @@ class UserAPI(MethodView):
         '''
         if user_id is None:
             # return a list of users
-            pass
+            return render_template('user/user_register.html')
         else:
             # expose a single user
             pass
@@ -36,13 +37,13 @@ class UserAPI(MethodView):
         pass
 
 
-user_view = UserAPI.as_view('user_api')
-app.add_url_rule('/users/', defaults={'user_id': None},
-                 view_func=user_view, methods=['GET',])
-app.add_url_rule('/users/', view_func=user_view, methods=['POST',])
-app.add_url_rule('/users/<int:user_id>', view_func=user_view,
-                 methods=['GET', 'PUT', 'DELETE'])
-111
+# user_view = UserAPI.as_view('user_api')
+# user.add_url_rule('/', defaults={'user_id': None},
+#                  view_func=user_view, methods=['GET',])
+# user.add_url_rule('/', view_func=user_view, methods=['POST',])
+# user.add_url_rule('/<int:user_id>', view_func=user_view,
+#                  methods=['GET', 'PUT', 'DELETE'])
+
 
 
 # def register_api(view, endpoint, url, pk='id', pk_type='int'):
