@@ -4,9 +4,9 @@ from flask.views import View, MethodView
 
 from . import user
 
-@user.route("/")
-def user_login():
-    return render_template("index.html")
+# @user.route("/")
+# def user_login():
+#     return render_template("index.html")
 
 
 class UserAPI(MethodView):
@@ -21,8 +21,9 @@ class UserAPI(MethodView):
             # return a list of users
             return render_template('user/user_register.html')
         else:
+
             # expose a single user
-            pass
+            return 'user'
 
     def post(self):
         # create a new user
@@ -46,12 +47,12 @@ class UserAPI(MethodView):
 
 
 
-# def register_api(view, endpoint, url, pk='id', pk_type='int'):
-#     view_func = view.as_view(endpoint)
-#     app.add_url_rule(url, defaults={pk: None},
-#                      view_func=view_func, methods=['GET',])
-#     app.add_url_rule(url, view_func=view_func, methods=['POST',])
-#     app.add_url_rule('%s<%s:%s>' % (url, pk_type, pk), view_func=view_func,
-#                      methods=['GET', 'PUT', 'DELETE'])
-#
-# register_api(UserAPI, 'user_api', '/users/', pk='user_id')
+def register_api(view, endpoint, url, pk='id', pk_type='int'):
+    view_func = view.as_view(endpoint)
+    user.add_url_rule(url, defaults={pk: None},
+                     view_func=view_func, methods=['GET',])
+    user.add_url_rule(url, view_func=view_func, methods=['POST',])
+    user.add_url_rule('%s<%s:%s>' % (url, pk_type, pk), view_func=view_func,
+                     methods=['GET', 'PUT', 'DELETE'])
+
+register_api(UserAPI, 'user_api', '/', pk='user_id')
