@@ -27,9 +27,11 @@ class UserLog(db.Model):
 
     __tablename__ = "ssmusic_userlog"
 
-    id = db.Codb.Column(db.Integer)
+    id = db.Column(db.Integer, primary_key=True)
     ip = db.Column(db.String(100))
+    operate = db.Column(db.String(100))
     do_what = db.Column(db.String(100))
+    user_id = db.Column(db.Integer)
     create_time = db.Column(db.DateTime, index=True, default=datetime.datetime.now())
 
     def __repr__(self):

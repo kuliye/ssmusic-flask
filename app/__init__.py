@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 import os
 
@@ -24,5 +24,10 @@ app.register_blueprint(user, url_prefix='/user')
 @app.errorhandler(404)
 def page_not_found(error):
     return render_template("404.html"), 404
+
+class FormBase():
+    def get_form_to_json(self):
+        form_data = request.form
+        return dict(form_data)
 
 
