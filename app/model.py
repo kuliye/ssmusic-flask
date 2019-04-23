@@ -43,10 +43,10 @@ class TestUser(db.Model):
     pwd = db.Column(db.String(100))
     create_time = db.Column(db.DateTime, index=True, default=datetime.datetime.now())
 
-    def __init__(self, name, pwd, create_time):
-        self.name = name
-        self.pwd = pwd
-        self.create_time = create_time
+    def __init__(self, user_dict):
+        self.name = user_dict['name']
+        self.pwd = user_dict['password']
+        self.create_time = datetime.datetime.now()
 
     def __repr__(self):
         return "<TestUser %r>".format(self.name)

@@ -19,7 +19,7 @@ class UserAPI(MethodView):
     def post(self):
         user = UserForm()
         form_data = user.register_form()
-        user = TestUser(form_data['name'], form_data['password'], datetime.now())
+        user = TestUser(form_data)
         db.session.add(user)
         db.session.commit()
         print(form_data)
