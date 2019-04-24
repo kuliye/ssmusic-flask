@@ -1,10 +1,10 @@
 from datetime import datetime
 
-from flask import render_template, Blueprint
+from flask import render_template, Blueprint, request
 from flask.views import View, MethodView
 
 from .user_form import UserForm
-from app.model import TestUser
+from app.model import TestUser, User
 from app import db
 
 
@@ -17,13 +17,18 @@ class UserAPI(MethodView):
             return 'user'
 
     def post(self):
-        user = UserForm()
-        form_data = user.register_form()
-        user = TestUser(form_data)
-        db.session.add(user)
-        db.session.commit()
-        print(form_data)
-        return 0
+        form_data = request.form
+        form_data_dict = dict(form_data)
+        user_form = {'method': 'register', 'form':form_data_dict }
+        data = UserForm(user_form).get_data()
+        if data['status'] == 'success':
+            user = User(data['form'])
+            db.session.add(user)
+            db.session.commit()
+            status = 'success'
+        else:
+            status = 'error'
+        return {'status': status, 'message': data['message']}
 
     def delete(self, user_id):
         pass

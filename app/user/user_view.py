@@ -13,12 +13,11 @@ def register():
         return render_template('user/user_register.html')
     elif request.method == 'POST':
         user = UserAPI()
-        status = user.post()
-        echo = '0'
-        if echo == '0':
-            flash('数据库操作失败', 'error')
+        register_return= user.post()
+        if register_return['status'] != 'success':
+            flash('注册失败{0}'.format(register_return['message']), 'error')
         else:
-            pass
-        return render_template('index.html', context={'status': status})
+            flash('注册成功', 'success')
+        return render_template('index.html')
     else:
         print('sasas')
