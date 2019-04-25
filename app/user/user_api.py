@@ -11,12 +11,14 @@ from app import db
 class UserAPI(MethodView):
 
     def get(self, user_id):
+        '登陆'
         if user_id is None:
             return render_template('user/user_register.html')
         else:
             return 'user'
 
     def post(self):
+        '注册'
         form_data = request.form
         form_data_dict = dict(form_data)
         user_form = {'method': 'register', 'form':form_data_dict }
