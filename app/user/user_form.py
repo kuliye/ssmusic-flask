@@ -16,10 +16,10 @@ class UserForm():
         if form_data_dict['method'] == 'register':
             self.register_form(form_data_dict['form'])
 
-    def set_data(self, form):
+    def set_form(self, form):
         self.form = form
 
-    def get_data(self):
+    def get_form(self):
         return self.form
 
     def register_form(self, form_data_dict):

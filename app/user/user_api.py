@@ -22,7 +22,7 @@ class UserAPI(MethodView):
         form_data = request.form
         form_data_dict = dict(form_data)
         user_form = {'method': 'register', 'form':form_data_dict }
-        data = UserForm(user_form).get_data()
+        data = UserForm(user_form).get_form()
         if data['status'] == 'success':
             user = User(data['form'])
             db.session.add(user)
