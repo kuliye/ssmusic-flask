@@ -17,13 +17,14 @@ class User(db.Model):
     info = db.Column(db.Text)
     gender = db.Column(db.Integer)
     uuid = db.Column(db.String(255), unique=True)
+    is_active = db.Column(db.Integer, default=0)
     create_time = db.Column(db.DateTime, default=datetime.datetime.now())
 
     def __init__(self, user_dict):
         self.name = user_dict['name']
         self.pwd = user_dict['password']
         self.email = user_dict['email']
-        self.phone = user_dict['phone']
+        # self.phone = user_dict['phone']
         self.gender = user_dict['gender']
         self.uuid = user_dict['uuid']
         self.create_time = datetime.datetime.now()

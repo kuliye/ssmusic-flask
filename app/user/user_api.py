@@ -75,12 +75,14 @@ class UserAPI(MethodView):
     def registerForm(self, form_data_dict):
         status = 'success'
         message_list = {}
-        key_list = ['password', 'name', 'phone', 'email', 'gender']
+        key_list = ['password', 'name', 'email', 'gender', 'password_confirm']
         if sorted([key for key, value in form_data_dict.items()]) != sorted(key_list):
             message_list['key_error'] = 'key错误'
         else:
             if len(form_data_dict['password']) >= 16 or len(form_data_dict['password']) <= 6:
                 message_list['password_error'] = '密码长度需要在6到16位之间'
+            elif form_data_dict['password'] != form_data_dict['password_confirm']:
+                message_list['password_error'] = '两次密码不一致'
             else:
                 h1 = hashlib.md5(form_data_dict['password'].encode("utf8"))
                 pwd = h1.hexdigest()
@@ -94,14 +96,14 @@ class UserAPI(MethodView):
 
             email_rex_flag = re.match(EMAIL_REX, form_data_dict['email'])
             if not email_rex_flag:
-                message_list['email_error'] = '邮箱地址不正确'
+                message_list['email_error'] = '邮箱格式不正确'
 
-            user = db.session.query(User).filter(User.phone == form_data_dict['phone']).all()
-            phone_rex_flag = re.match(PHONE_REX, form_data_dict['phone'])
-            if user:
-                message_list['phone_error'] = '手机号码已存在'
-            elif not phone_rex_flag:
-                message_list['phone_error'] = '手机号码不正确'
+            # user = db.session.query(User).filter(User.phone == form_data_dict['phone']).all()
+            # phone_rex_flag = re.match(PHONE_REX, form_data_dict['phone'])
+            # if user:
+            #     message_list['phone_error'] = '手机号码已存在'
+            # elif not phone_rex_flag:
+            #     message_list['phone_error'] = '手机号码不正确'
 
             if form_data_dict['gender'] not in ('0', '1'):
                 message_list['gender_error'] = '性别错误'
