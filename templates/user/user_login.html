@@ -1,10 +1,60 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "user/user_base.html" %}
+{% block user_content %}
+        <fieldset class="layui-elem-field layui-field-title">
+            <legend>会员登陆</legend>
+        </fieldset>
+        <div class="layui-col-md3">
+            &nbsp;
+        </div>
+        <div style="margin-top: 30px">
+            <div class="layui-col-md6">
+                <div style="padding: 20px; background-color: #F2F2F2;">
+                    <div class="layui-card">
+                        <div class="layui-card-header">登录</div>
+                        <div class="layui-card-body">
+                            <form class="layui-form" action="{{ url_for('user.login') }} " method="post">
 
-</body>
-</html>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">邮箱</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="email" placeholder="请输入邮箱" autocomplete="off"
+                                               class="layui-input">
+                                    </div>
+                                </div>
+
+
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">密码</label>
+                                    <div class="layui-input-block">
+                                        <input type="password" name="password" placeholder="请输入密码" autocomplete="off"
+                                               class="layui-input">
+                                    </div>
+                                </div>
+
+                                <div class="layui-form-item">
+                                    <div class="layui-input-block">
+                                        <button type="submit" class="layui-btn" lay-submit lay-filter="*">登陆</button>
+                                         <button type="" class="layui-btn layui-btn-primary"><a href="{{ url_for('user.register') }}">注册</a></button>
+                                    </div>
+                                </div>
+                                <!-- 更多表单结构排版请移步文档左侧【页面元素-表单】一项阅览 -->
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <div class="layui-col-md3">
+    </div>
+
+
+
+
+    <script>
+        layui.use('form', function () {
+            var form = layui.form;
+
+            //各种基于事件的操作，下面会有进一步介绍
+        });
+    </script>
+{% endblock %}
