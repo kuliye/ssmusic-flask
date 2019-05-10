@@ -9,6 +9,6 @@ from .index_api import IndexAPI
 @app.route('/', methods=['POST', 'GET'])
 def index():
     if request.method == 'GET':
-        return render_template("index.html", context=user)
+        return render_template("index.html")
 
 app.secret_key = '123456'
