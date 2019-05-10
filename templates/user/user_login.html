@@ -15,9 +15,9 @@
                             <form class="layui-form" action="{{ url_for('user.login') }} " method="post">
 
                                 <div class="layui-form-item">
-                                    <label class="layui-form-label">邮箱</label>
+                                    <label class="layui-form-label">用户名</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="email" placeholder="请输入邮箱" autocomplete="off"
+                                        <input type="text" name="name" placeholder="请输入用户名" autocomplete="off"
                                                class="layui-input">
                                     </div>
                                 </div>
@@ -34,8 +34,9 @@
                                 <div class="layui-form-item">
                                     <div class="layui-input-block">
                                         <button type="submit" class="layui-btn" lay-submit lay-filter="*">登陆</button>
-                                         <button type="" class="layui-btn layui-btn-primary"><a href="{{ url_for('user.register') }}">注册</a></button>
+                                         <a class="layui-btn layui-btn-primary" href="{{ url_for('user.register') }}">已有账号？点击登陆</a>
                                     </div>
+
                                 </div>
                                 <!-- 更多表单结构排版请移步文档左侧【页面元素-表单】一项阅览 -->
                             </form>

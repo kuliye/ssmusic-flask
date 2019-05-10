@@ -13,20 +13,16 @@ from app.setting import EMAIL_REX, PHONE_REX
 from flask import session
 
 
-
 class UserAPI(MethodView):
-
     register_form = {}
     login_form = {}
 
     def login(self):
         '登陆'
-        name = request.args.get('name')
-        password = request.args.get('password')
-        form_data_dict = {'name':name, 'password':password}
+        form_data = request.form
+        form_data_dict = dict(form_data)
         self.loginForm(form_data_dict)
-        if self.login_form['status'] == 'success':
-            return {'status': self.login_form['status'], 'message': self.login_form['message']}
+        return {'status': self.login_form['status'], 'message': self.login_form['message']}
 
     def loginForm(self, form_data_dict):
         status = 'success'
@@ -72,7 +68,7 @@ class UserAPI(MethodView):
             status = 'error'
         return {'status': status, 'message': self.register_form['message']}
 
-    def registerForm(self, form_data_dict):
+    def registerform(self, form_data_dict):
         status = 'success'
         message_list = {}
         key_list = ['password', 'name', 'email', 'gender', 'password_confirm']
@@ -115,9 +111,6 @@ class UserAPI(MethodView):
             if not message_list == {}:
                 status = 'error'
         self.register_form = {'status': status, 'message': message_list, 'form': form_data_dict}
-
-
-
 
 # def register_api(view, endpoint, url, pk='id', pk_type='int'):
 #     view_func = view.as_view(endpoint)

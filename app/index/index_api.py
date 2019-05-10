@@ -1,10 +1,12 @@
-from app import app
-from flask import render_template
+from flask import session
+from flask.views import View, MethodView
+from app.Base import Appliction
 
-from flask import Blueprint
+class IndexAPI(MethodView):
 
+    user = ''
 
-
-@app.route('/')
-def index():
-    return render_template("index.html")
+    def __init__(self):
+        self.user = session.get('user')
+    def index(self):
+        self.user = session.get('user')

@@ -1,4 +1,3 @@
-from app.base_class import FormBase
 import hashlib
 import re
 import uuid

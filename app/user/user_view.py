@@ -20,7 +20,6 @@ def register():
         else:
             flash('注册成功', 'success')
             return redirect(url_for('user.login_page'))
-
     else:
         print('无效的方式')
 
@@ -33,7 +32,9 @@ def login():
         login_return = UserAPI().login()
         if login_return['status'] != 'success':
             flash('登陆失败{0}'.format(login_return['message']), 'error')
+            print(login_return['message'])
+            return redirect(url_for('user.login'))
         else:
             flash('登陆成功', 'success')
-        return render_template('index.html')
+            return redirect(url_for('index'))
 
