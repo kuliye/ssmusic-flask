@@ -6,7 +6,6 @@ import uuid
 from flask import render_template, Blueprint, request
 from flask.views import View, MethodView
 
-from .user_form import UserForm
 from app.model import TestUser, User
 from app import db
 from app.setting import EMAIL_REX, PHONE_REX
@@ -68,7 +67,7 @@ class UserAPI(MethodView):
             status = 'error'
         return {'status': status, 'message': self.register_form['message']}
 
-    def registerform(self, form_data_dict):
+    def registerForm(self, form_data_dict):
         status = 'success'
         message_list = {}
         key_list = ['password', 'name', 'email', 'gender', 'password_confirm']

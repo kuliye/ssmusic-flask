@@ -19,7 +19,7 @@ def register():
             return redirect(url_for('user.register'))
         else:
             flash('注册成功', 'success')
-            return redirect(url_for('user.login_page'))
+            return redirect(url_for('user.login'))
     else:
         print('无效的方式')
 
